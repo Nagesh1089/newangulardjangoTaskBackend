@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+</head>
+<body>
+    <h1>Students List</h1>
+    <a href="/students/create/">Add Student</a>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.name }} - {{ student.city }} - {{ student.birth_date }}</li>
+        {% empty %}
+            <li>No students found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
