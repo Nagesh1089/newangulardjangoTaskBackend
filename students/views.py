@@ -7,6 +7,10 @@ from .models import Student
 @csrf_exempt
 # import sys
 @csrf_exempt
+def student_list(request):
+    students = Student.objects.all().values()  # fetch all rows
+    return JsonResponse(list(students), safe=False)
+@csrf_exempt
 def student_create(request):
     if request.method == "POST":
         try:
@@ -74,5 +78,5 @@ def delete_student(request):
             return JsonResponse({"error": "Student not found"}, status=404)
     return JsonResponse({"error": "Method not allowed"}, status=405)
 def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'students/student_list.html', {'students': students})
+    students = list(Student.objects.values())  # convert queryset to list of dicts
+    return JsonResponse({'students': students})
